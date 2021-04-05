@@ -1,0 +1,458 @@
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    </head>
+    <body  onload="loadAll(); loadAllProducts(); loadAllCategory();">
+         <div id="userModal" class="modal fade" role="dialog" tabindex="-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add User</h4><button type="button" class="close" data-dismiss="modal"
+                                                                     aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-between"><label>Name</label><input id="name"
+                                                                                              class="flex-fill ml-2" type="text"></div>
+                        <div class="d-flex justify-content-between mt-2"><label>UserName</label><input id="un"
+                                                                                                       class="flex-fill ml-2" type="text"></div>
+                        <div class="d-flex justify-content-between mt-2"><label>Password</label><input id="pw"
+                                                                                                       class="flex-fill ml-2" type="password"></div>
+                        <div class="d-flex justify-content-between mt-2"><label>Phone</label><input id="phone"
+                                                                                                    class="flex-fill ml-2" type="text"></div>
+                        <div class="d-flex justify-content-between mt-2"><label>Age</label><input id="age"
+                                                                                                  class="flex-fill ml-2" type="number"></div>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button"
+                                                      data-dismiss="modal">Close</button><button class="btn btn-primary" type="button"
+                                                      onclick="add();">Add</button></div>
+                </div>
+            </div>
+        </div>
+        <div id="catModal" class="modal fade" role="dialog" tabindex="-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Product</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-between"><label>Name</label><input id="catName" class="flex-fill ml-2" type="text"></div>
+                        <div class="d-flex justify-content-between mt-2"><label>Description</label><input id="catDescription" class="flex-fill ml-2" type="text"></div>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button" onclick="addCategory();">Add</button></div>
+                </div>
+            </div>
+        </div>
+        <div id="userModal2" class="modal fade" role="dialog" tabindex="-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Product Category</h4><button type="button" class="close" data-dismiss="modal"
+                                                                                 aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-between"><label>Product Name</label><input id="pname"
+                                                                                                      class="flex-fill ml-2" type="text"></div>
+                        <div class="d-flex justify-content-between mt-2"><label>Selling Price</label><input
+                                id="psellingPrice" class="flex-fill ml-2" type="text"></div>
+                        <div class="d-flex justify-content-between mt-2"><label>Buying Price</label><input
+                                class="flex-fill ml-2" type="text" id="buyPrice"></div>
+                        <div class="d-flex justify-content-between mt-2"><label>Qty</label><input id="pqty"
+                                                                                                  class="flex-fill ml-2" type="text"></div>
+                        <div class="d-flex justify-content-between mt-2"><label>Description</label><input id="pdescription"
+                                                                                                          class="flex-fill ml-2" type="text"></div>
+
+                        <div class="d-flex justify-content-between mt-2"><label>Catogory ID</label><input id="pcat"
+                                                                                                          class="flex-fill ml-2" type="number"></div>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button"
+                                                      data-dismiss="modal">Close</button><button class="btn btn-primary" type="button"
+                                                      onclick="addProduct();">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-2">
+            <div>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-toggle="tab"
+                                                                href="#tab-1">User</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-toggle="tab"
+                                                                href="#tab-2">Product</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-toggle="tab"
+                                                                href="#tab-3">Product Cat</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" role="tabpanel" id="tab-1">
+                        <div class="mt-1">
+                            <button class="btn btn-primary" type="button" data-target="#userModal" data-toggle="modal">Add
+                                User</button>
+                            <span class="ml-2">Search</span><input type="text" class="ml-1" id="search">
+                        </div>
+                        <div class="table-responsive mt-1">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Username</th>
+                                        <th>Age</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tb">
+                                    <tr>
+                                        <td>Cell 1</td>
+                                        <td>Cell 2</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="tab-2">
+                        <button class="btn btn-primary" type="button" data-target="#userModal2" data-toggle="modal">Add
+                            Products</button>
+                        <span class="ml-2">Search</span><input type="text" class="ml-1" id="search2">
+                        <div class="table-responsive mt-1">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Product Name</th>
+                                        <th>Selling Price</th>
+                                        <th>Buying Price</th>
+                                        <th>QTY</th>
+                                        <th>Description</th>
+                                        <th>Catogory ID</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="pb">
+                                    <tr>
+                                        <td>Cell 1</td>
+                                        <td>Cell 1</td>
+                                        <td>Cell 1</td>
+                                        <td>Cell 1</td>
+                                        <td>Cell 1</td>
+                                        <td>Cell 1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="tab-3">
+                        <div class="mt-1">
+
+                            <button class="btn btn-primary" type="button" data-target="#catModal" data-toggle="modal">Add</button>
+                            <span class="ml-2">Search</span><input type="text" class="ml-1" id="searchCat">
+
+
+                            <div class="table-responsive mt-1">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbcat">
+                                        <tr>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script  src="assets/js/jquery.min.js"></script>
+        <script  src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script>
+
+                                                          function loadAllProducts() {
+                                                              var tbody = document.getElementById("pb");
+                                                              tbody.innerHTML = "";
+                                                              $.get("http://34.68.73.15:8080/products/getProducts", function (products) {
+                                                                  for (var i = 0; i < products.length; i++) {
+                                                                      var u = products[i];
+                                                                      tbody.innerHTML += "<tr id=\"trp-" + u["id"] + "\">" +
+                                                                              "<td>" + u["id"] + "</td>" +
+                                                                              "<td><input type=\"text\" value=\"" + u["name"] + "\"></td>" +
+                                                                              "<td><input type=\"text\" value=\"" + u["sellPrice"] + "\"></td>" +
+                                                                              "<td><input type=\"text\" value=\"" + u["buyPrice"] + "\"></td>" +
+                                                                              "<td><input type=\"text\" value=\"" + u["qty"] + " \"></td>" +
+                                                                              "<td><input type=\"text\" value=\"" + u["description"] + " \"></td>" +
+                                                                              "<td><input type=\"text\" value=\"" + u["productCat"].id + " \"></td>" +
+                                                                              "<td style=\"width: 200px; display: flex;\"><button class=\"btn btn-primary\" type=\"button\" onclick=\"updateProducts(" + u["id"] + ");\">Update</button><button class=\"btn btn-danger ml-2\" type=\"button\" onclick=\"delProducts(" + u["id"] + ");\">Delete</button></td>" +
+                                                                              "</tr>";
+                                                                  }
+                                                              });
+                                                          }
+
+
+                                                          function updateProducts(id) {
+                                                              var tr = document.getElementById("trp-" + id);
+                                                              var pname = tr.cells[1].getElementsByTagName("input")[0].value;
+                                                              var sell = tr.cells[2].getElementsByTagName("input")[0].value;
+                                                              var buy = tr.cells[3].getElementsByTagName("input")[0].value;
+                                                              var qty = tr.cells[4].getElementsByTagName("input")[0].value;
+                                                              var des = tr.cells[5].getElementsByTagName("input")[0].value;
+                                                              var cat = tr.cells[6].getElementsByTagName("input")[0].value;
+
+                                                              $.ajax({
+                                                                  method: "PUT",
+                                                                  url: "http://34.68.73.15:8080/products/updateProduct",
+                                                                  data: {"id": id, "name": pname, "des": des, "buy": buy, "sell": sell, "qty": qty, "productCat": cat}
+                                                              }).done(function (msg) {
+                                                                  $("#userModal2").modal('hide');
+                                                                  loadAllProducts();
+                                                                   alert("Products Updated: ");
+                                                              });
+
+                                                          }
+
+                                                          $("#search2").keyup(function () {
+                                                              var txt = $("#search2").val();
+
+                                                              if (txt.trim() == "") {
+                                                                  loadAllProducts();
+                                                              } else {
+                                                                  $.get("http://34.68.73.15:8080/products/findByName/" + $(this).val(), function (Product) {
+                                                                      var tbody = document.getElementById("pb");
+                                                                      tbody.innerHTML = "";
+                                                                      for (var i = 0; i < Product.length; i++) {
+                                                                          var u = Product[i];
+                                                                          tbody.innerHTML += "<tr id=\"trp-" + u["id"] + "\">" +
+                                                                                  "<td>" + u["id"] + "</td>" +
+                                                                                  "<td><input type=\"text\" value=\"" + u["name"] + "\"></td>" +
+                                                                                  "<td><input type=\"text\" value=\"" + u["sellPrice"] + "\"></td>" +
+                                                                                  "<td><input type=\"text\" value=\"" + u["buyPrice"] + "\"></td>" +
+                                                                                  "<td><input type=\"text\" value=\"" + u["qty"] + " \"></td>" +
+                                                                                  "<td><input type=\"text\" value=\"" + u["description"] + " \"></td>" +
+                                                                                  "<td><input type=\"text\" value=\"" + u["productCat"].name + " \"></td>" +
+                                                                                  "<td style=\"width: 200px; display: flex;\"><button class=\"btn btn-primary\" type=\"button\" onclick=\"updateProducts(" + u["id"] + ");\">Update</button><button class=\"btn btn-danger ml-2\" type=\"button\" onclick=\"delProducts(" + u["id"] + ");\">Delete</button></td>" +
+                                                                                  "</tr>";
+                                                                      }
+                                                                  });
+                                                              }
+                                                          });
+
+                                                          function addProduct() {
+                                                              var pname = document.getElementById("pname").value.trim();
+                                                              var selling = document.getElementById("buyPrice").value;
+                                                              var buying = document.getElementById("psellingPrice").value;
+                                                              var qty = document.getElementById("pqty").value;
+                                                              var des = document.getElementById("pdescription").value;
+                                                              var cat = document.getElementById("pcat").value;
+
+                                                              $.ajax({
+                                                                  method: "POST",
+                                                                  url: "http://34.68.73.15:8080/products/save",
+                                                                  data: {"name": pname, "des": des, "buy": buying, "sell": selling, "qty": qty, "productCat": cat}
+                                                              }).done(function (msg) {
+                                                                  $("#userModal2").modal('hide');
+                                                                  loadAllProducts();
+                                                              });
+
+                                                          }
+
+                                                          function delProducts(id) {
+                                                              $.ajax({
+                                                                  method: "DELETE",
+                                                                  url: "http://34.68.73.15:8080/products/deleteProduct/" + id
+                                                              }).done(function (msg) {
+                                                                  loadAllProducts();
+                                                              });
+                                                          }
+
+                                                          function loadAll() {
+                                                              var tbody = document.getElementById("tb");
+                                                              tbody.innerHTML = "";
+
+                                                              $.get("http://34.68.73.15:8080/user/getUsers", function (users) {
+                                                                  for (var i = 0; i < users.length; i++) {
+                                                                      var u = users[i];
+                                                                      tbody.innerHTML += "<tr id=\"tr-" + u["id"] + "\">" +
+                                                                              "<td>" + u["id"] + "</td>" +
+                                                                              "<td><input type=\"text\" value=\"" + u["name"] + "\"></td>" +
+                                                                              "<td><input type=\"text\" value=\"" + u["phone"] + "\"></td>" +
+                                                                              "<td><input type=\"text\" value=\"" + u["username"] + "\"></td>" +
+                                                                              "<td><input type=\"text\" value=\"" + u["age"] + " \"></td>" +
+                                                                              "<td style=\"width: 200px;\"><button class=\"btn btn-primary\" type=\"button\" onclick=\"update(" + u["id"] + ");\">Update</button><button class=\"btn btn-danger ml-2\" type=\"button\" onclick=\"del(" + u["id"] + ");\">Delete</button></td>" +
+                                                                              "</tr>";
+                                                                  }
+                                                              });
+                                                          }
+
+                                                          function add() {
+                                                              var un = document.getElementById("un").value.trim();
+                                                              var pw = document.getElementById("pw").value;
+                                                              var phone = document.getElementById("phone").value;
+                                                              var age = document.getElementById("age").value;
+                                                              var name = document.getElementById("name").value;
+
+                                                              $.ajax({
+                                                                  method: "POST",
+                                                                  url: "http://34.68.73.15:8080/user/save",
+                                                                  data: {"un": un, "pw": pw, "phone": phone, "name": name, "age": age}
+                                                              }).done(function (msg) {
+                                                                  $("#userModal").modal('hide');
+                                                                  loadAll();
+                                                              });
+                                                          }
+
+                                                          function update(id) {
+                                                              var tr = document.getElementById("tr-" + id);
+                                                              var u = {};
+                                                              u["id"] = id;
+                                                              u["name"] = tr.cells[1].getElementsByTagName("input")[0].value;
+                                                              u["phone"] = tr.cells[2].getElementsByTagName("input")[0].value;
+                                                              u["username"] = tr.cells[3].getElementsByTagName("input")[0].value;
+                                                              u["age"] = tr.cells[4].getElementsByTagName("input")[0].value;
+
+                                                              $.ajax({
+                                                                  headers: {
+                                                                      'Accept': 'application/json',
+                                                                      'Content-Type': 'application/json'
+                                                                  },
+                                                                  method: "PUT",
+                                                                  url: "http://34.68.73.15:8080/user/updateUser",
+                                                                  data: JSON.stringify(u),
+                                                                  dataType: 'json'
+                                                              }).done(function (msg) {
+                                                                  loadAll();
+                                                                  alert("User Updated: ");
+                                                              });
+                                                          }
+
+                                                          function del(id) {
+                                                              $.ajax({
+                                                                  method: "DELETE",
+                                                                  url: "http://34.68.73.15:8080/user/" + id
+                                                              }).done(function (msg) {
+                                                                  loadAll();
+                                                              });
+                                                          }
+
+                                                          $("#search").keyup(function () {
+
+                                                              var txt = $("#search").val();
+
+                                                              if (txt.trim() == "") {
+                                                                  loadAll();
+                                                              } else {
+                                                                  $.get("http://34.68.73.15:8080/user/getUsersByNameLike/" + $(this).val(), function (users) {
+                                                                      var tbody = document.getElementById("tb");
+                                                                      tbody.innerHTML = "";
+                                                                      for (var i = 0; i < users.length; i++) {
+                                                                          var u = users[i];
+                                                                          tbody.innerHTML += "<tr id=\"tr-" + u["id"] + "\">" +
+                                                                                  "<td>" + u["id"] + "</td>" +
+                                                                                  "<td><input type=\"text\" value=\"" + u["name"] + "\"></td>" +
+                                                                                  "<td><input type=\"text\" value=\"" + u["phone"] + "\"></td>" +
+                                                                                  "<td><input type=\"text\" value=\"" + u["username"] + "\"></td>" +
+                                                                                  "<td><input type=\"text\" value=\"" + u["age"] + " \"></td>" +
+                                                                                  "<td style=\"width: 200px;\"><button class=\"btn btn-primary\" type=\"button\" onclick=\"update(" + u["id"] + ");\">Update</button><button class=\"btn btn-danger ml-2\" type=\"button\" onclick=\"del(" + u["id"] + ");\">Delete</button></td>" +
+                                                                                  "</tr>";
+                                                                      }
+                                                                  });
+                                                              }
+                                                          });
+
+
+
+                                                          function loadAllCategory() {
+                                                              var tbody = document.getElementById("tbcat");
+                                                              tbody.innerHTML = "";
+
+                                                              $.get("http://34.68.73.15:8080/category/getCategories", function (users) {
+                                                                  for (var i = 0; i < users.length; i++) {
+                                                                      var u = users[i];
+                                                                      tbody.innerHTML += "<tr id=\"trc-" + u["id"] + "\">" +
+                                                                              "<td>" + u["id"] + "</td>" +
+                                                                              "<td><input type=\"text\" value=\"" + u["name"] + "\"></td>" +
+                                                                              "<td><input type=\"text\" value=\"" + u["description"] + "\"></td>" +
+                                                                              "<td style=\"width: 200px;\"><button class=\"btn btn-primary\" type=\"button\" onclick=\"updateCategory(" + u["id"] + ");\">Update</button><button class=\"btn btn-danger ml-2\" type=\"button\" onclick=\"delCategory(" + u["id"] + ");\">Delete</button></td>" +
+                                                                              "</tr>";
+                                                                  }
+                                                              });
+                                                          }
+
+                                                          function updateCategory(id) {
+                                                              var tr = document.getElementById("trc-" + id);
+                                                              var u = {};
+                                                              u["id"] = id;
+                                                              u["name"] = tr.cells[1].getElementsByTagName("input")[0].value;
+                                                              u["description"] = tr.cells[2].getElementsByTagName("input")[0].value;
+
+
+                                                              $.ajax({
+                                                                  headers: {
+                                                                      'Accept': 'application/json',
+                                                                      'Content-Type': 'application/json'
+                                                                  },
+                                                                  method: "PUT",
+                                                                  url: "http://34.68.73.15:8080/category/update",
+                                                                  data: JSON.stringify(u),
+                                                                  dataType: 'json'
+                                                              }).done(function (msg) {
+                                                                  loadAllCategory();
+                                                                  alert("Category Updated: ");
+                                                              });
+                                                          }
+
+                                                          function addCategory() {
+
+                                                              var description = document.getElementById("catDescription").value;
+                                                              var name = document.getElementById("catName").value;
+
+                                                              $.ajax({
+                                                                  method: "POST",
+                                                                  url: "http://34.68.73.15:8080/category/save",
+                                                                  data: {"name": name, "description": description}
+                                                              }).done(function (msg) {
+                                                                  $("#catModal").modal('hide');
+                                                                  loadAllCategory();
+                                                              });
+                                                          }
+
+                                                          function delCategory(id) {
+                                                              $.ajax({
+                                                                  method: "DELETE",
+                                                                  url: "http://34.68.73.15:8080/category/" + id
+                                                              }).done(function (msg) {
+                                                                  loadAllCategory();
+                                                              });
+                                                          }
+
+                                                          $("#searchCat").keyup(function () {
+                                                              var txt = $("#searchCat").val();
+
+                                                              if (txt.trim() == "") {
+                                                                  loadAllCategory();
+                                                              } else {
+                                                                  $.get("http://34.68.73.15:8080/category/catByName/" + $(this).val(), function (users) {
+                                                                      var tbody = document.getElementById("tbcat");
+                                                                      tbody.innerHTML = "";
+                                                                      for (var i = 0; i < users.length; i++) {
+                                                                          var u = users[i];
+                                                                          tbody.innerHTML += "<tr id=\"trc-" + u["id"] + "\">" +
+                                                                                  "<td>" + u["id"] + "</td>" +
+                                                                                  "<td><input type=\"text\" value=\"" + u["name"] + "\"></td>" +
+                                                                                  "<td><input type=\"text\" value=\"" + u["description"] + "\"></td>" +
+                                                                                  "<td style=\"width: 200px;\"><button class=\"btn btn-primary\" type=\"button\" onclick=\"updateCategory(" + u["id"] + ");\">Update</button><button class=\"btn btn-danger ml-2\" type=\"button\" onclick=\"delCategory(" + u["id"] + ");\">Delete</button></td>" +
+                                                                                  "</tr>";
+                                                                      }
+                                                                  });
+                                                              }
+                                                          });
+        </script>
+    </body>
+</html>
