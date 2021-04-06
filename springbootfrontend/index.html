@@ -179,7 +179,7 @@
                                                           function loadAllProducts() {
                                                               var tbody = document.getElementById("pb");
                                                               tbody.innerHTML = "";
-                                                              $.get("http://34.68.73.15:8080/products/getProducts", function (products) {
+                                                              $.get("http://192.168.1.4:8889/products/getProducts", function (products) {
                                                                   for (var i = 0; i < products.length; i++) {
                                                                       var u = products[i];
                                                                       tbody.innerHTML += "<tr id=\"trp-" + u["id"] + "\">" +
@@ -208,7 +208,7 @@
 
                                                               $.ajax({
                                                                   method: "PUT",
-                                                                  url: "http://34.68.73.15:8080/products/updateProduct",
+                                                                  url: "http://192.168.1.4:8889/products/updateProduct",
                                                                   data: {"id": id, "name": pname, "des": des, "buy": buy, "sell": sell, "qty": qty, "productCat": cat}
                                                               }).done(function (msg) {
                                                                   $("#userModal2").modal('hide');
@@ -224,7 +224,7 @@
                                                               if (txt.trim() == "") {
                                                                   loadAllProducts();
                                                               } else {
-                                                                  $.get("http://34.68.73.15:8080/products/findByName/" + $(this).val(), function (Product) {
+                                                                  $.get("http://192.168.1.4:8889/products/findByName/" + $(this).val(), function (Product) {
                                                                       var tbody = document.getElementById("pb");
                                                                       tbody.innerHTML = "";
                                                                       for (var i = 0; i < Product.length; i++) {
@@ -254,7 +254,7 @@
 
                                                               $.ajax({
                                                                   method: "POST",
-                                                                  url: "http://34.68.73.15:8080/products/save",
+                                                                  url: "http://192.168.1.4:8889/products/save",
                                                                   data: {"name": pname, "des": des, "buy": buying, "sell": selling, "qty": qty, "productCat": cat}
                                                               }).done(function (msg) {
                                                                   $("#userModal2").modal('hide');
@@ -266,7 +266,7 @@
                                                           function delProducts(id) {
                                                               $.ajax({
                                                                   method: "DELETE",
-                                                                  url: "http://34.68.73.15:8080/products/deleteProduct/" + id
+                                                                  url: "http://192.168.1.4:8889/products/deleteProduct/" + id
                                                               }).done(function (msg) {
                                                                   loadAllProducts();
                                                               });
@@ -276,7 +276,7 @@
                                                               var tbody = document.getElementById("tb");
                                                               tbody.innerHTML = "";
 
-                                                              $.get("http://34.68.73.15:8080/user/getUsers", function (users) {
+                                                              $.get("http://192.168.1.4:8889/user/getUsers", function (users) {
                                                                   for (var i = 0; i < users.length; i++) {
                                                                       var u = users[i];
                                                                       tbody.innerHTML += "<tr id=\"tr-" + u["id"] + "\">" +
@@ -300,7 +300,7 @@
 
                                                               $.ajax({
                                                                   method: "POST",
-                                                                  url: "http://34.68.73.15:8080/user/save",
+                                                                  url: "http://192.168.1.4:8889/user/save",
                                                                   data: {"un": un, "pw": pw, "phone": phone, "name": name, "age": age}
                                                               }).done(function (msg) {
                                                                   $("#userModal").modal('hide');
@@ -323,7 +323,7 @@
                                                                       'Content-Type': 'application/json'
                                                                   },
                                                                   method: "PUT",
-                                                                  url: "http://34.68.73.15:8080/user/updateUser",
+                                                                  url: "http://192.168.1.4:8889/user/updateUser",
                                                                   data: JSON.stringify(u),
                                                                   dataType: 'json'
                                                               }).done(function (msg) {
@@ -335,7 +335,7 @@
                                                           function del(id) {
                                                               $.ajax({
                                                                   method: "DELETE",
-                                                                  url: "http://34.68.73.15:8080/user/" + id
+                                                                  url: "http://192.168.1.4:8889/user/" + id
                                                               }).done(function (msg) {
                                                                   loadAll();
                                                               });
@@ -348,7 +348,7 @@
                                                               if (txt.trim() == "") {
                                                                   loadAll();
                                                               } else {
-                                                                  $.get("http://34.68.73.15:8080/user/getUsersByNameLike/" + $(this).val(), function (users) {
+                                                                  $.get("http://192.168.1.4:8889/user/getUsersByNameLike/" + $(this).val(), function (users) {
                                                                       var tbody = document.getElementById("tb");
                                                                       tbody.innerHTML = "";
                                                                       for (var i = 0; i < users.length; i++) {
@@ -372,7 +372,7 @@
                                                               var tbody = document.getElementById("tbcat");
                                                               tbody.innerHTML = "";
 
-                                                              $.get("http://34.68.73.15:8080/category/getCategories", function (users) {
+                                                              $.get("http://192.168.1.4:8889/category/getCategories", function (users) {
                                                                   for (var i = 0; i < users.length; i++) {
                                                                       var u = users[i];
                                                                       tbody.innerHTML += "<tr id=\"trc-" + u["id"] + "\">" +
@@ -399,7 +399,7 @@
                                                                       'Content-Type': 'application/json'
                                                                   },
                                                                   method: "PUT",
-                                                                  url: "http://34.68.73.15:8080/category/update",
+                                                                  url: "http://192.168.1.4:8889/category/update",
                                                                   data: JSON.stringify(u),
                                                                   dataType: 'json'
                                                               }).done(function (msg) {
@@ -415,7 +415,7 @@
 
                                                               $.ajax({
                                                                   method: "POST",
-                                                                  url: "http://34.68.73.15:8080/category/save",
+                                                                  url: "http://192.168.1.4:8889/category/save",
                                                                   data: {"name": name, "description": description}
                                                               }).done(function (msg) {
                                                                   $("#catModal").modal('hide');
@@ -426,7 +426,7 @@
                                                           function delCategory(id) {
                                                               $.ajax({
                                                                   method: "DELETE",
-                                                                  url: "http://34.68.73.15:8080/category/" + id
+                                                                  url: "http://192.168.1.4:8889/category/" + id
                                                               }).done(function (msg) {
                                                                   loadAllCategory();
                                                               });
@@ -438,7 +438,7 @@
                                                               if (txt.trim() == "") {
                                                                   loadAllCategory();
                                                               } else {
-                                                                  $.get("http://34.68.73.15:8080/category/catByName/" + $(this).val(), function (users) {
+                                                                  $.get("http://192.168.1.4:8889/category/catByName/" + $(this).val(), function (users) {
                                                                       var tbody = document.getElementById("tbcat");
                                                                       tbody.innerHTML = "";
                                                                       for (var i = 0; i < users.length; i++) {
